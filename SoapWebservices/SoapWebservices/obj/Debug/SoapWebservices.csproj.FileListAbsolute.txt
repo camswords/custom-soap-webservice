@@ -1,0 +1,7 @@
+C:\Documents and Settings\Administrator\Local Settings\Application Data\Temporary Projects\SoapWebservices\bin\Debug\SoapWebservices.exe
+C:\Documents and Settings\Administrator\Local Settings\Application Data\Temporary Projects\SoapWebservices\bin\Debug\SoapWebservices.pdb
+C:\Documents and Settings\Administrator\Local Settings\Application Data\Temporary Projects\SoapWebservices\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Local Settings\Application Data\Temporary Projects\SoapWebservices\obj\Debug\SoapWebservices.exe
+C:\Documents and Settings\Administrator\Local Settings\Application Data\Temporary Projects\SoapWebservices\obj\Debug\SoapWebservices.pdb
+C:\development\learningProjects\custom-soap-webservices-.net\SoapWebservices\SoapWebservices\obj\Debug\SoapWebservices.exe
+C:\development\learningProjects\custom-soap-webservices-.net\SoapWebservices\SoapWebservices\obj\Debug\SoapWebservices.pdb
