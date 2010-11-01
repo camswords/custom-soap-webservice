@@ -7,7 +7,7 @@ namespace SoapWebservices
 {
     public class HttpGateway
     {
-        public string Post(HttpPost post)
+        public HttpResponse Post(HttpPost post)
         {
             byte[] data = post.ToBytes();
 
@@ -28,6 +28,7 @@ namespace SoapWebservices
             
             var response = (HttpWebResponse)request.GetResponse();
             var statusCode = response.StatusCode;
+            var statusDescription = response.StatusDescription;
 
             var dataStream = response.GetResponseStream();
             var responseStream = new StreamReader(dataStream);
@@ -37,7 +38,7 @@ namespace SoapWebservices
             dataStream.Close();
             response.Close();
 
-            return content;
+            return new HttpResponse(statusCode, statusDescription, content);
         }
 
         public string Get(HttpGet get)

@@ -14,20 +14,13 @@ namespace SoapWebservices
             string request = new RandomGoogleSearchMessageBuilder().Build();
 
 
-            var post = new HttpPost("http://www.ghettodriveby.com/soap/index.php", request, "text/xml", "utf-8");
+            var post = new HttpPost("http://www.g3hettodriveby.com/soap/index.php", request, "text/xml", "utf-8");
             post.AddHeader("SOAPAction", "urn:RandomGoogleSearch#RandomGoogleSearch#getRandomGoogleSearch");
 
-            var postContent = new HttpGateway().Post(post);
+            var response = new HttpGateway().Post(post);
 
-            Console.WriteLine("content: " + postContent);
-            Console.WriteLine("-------");
-
-            var getContent = new HttpGateway().Get(new HttpGet("http://www.google.co.uk/"));
-            Console.WriteLine(getContent);
-
+            Console.WriteLine("content: " + response.Content);
             Console.ReadLine();
-
-
         }
     }
 }
