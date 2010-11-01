@@ -11,35 +11,23 @@ namespace SoapWebservices
     {
         static void Main(string[] args)
         {
-            string request = @"<soapenv:Envelope xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:soapenv=""http://schemas.xmlsoap.org/soap/envelope/"" xmlns:urn=""urn:RandomGoogleSearch""><soapenv:Header/><soapenv:Body><urn:getRandomGoogleSearch soapenv:encodingStyle=""http://schemas.xmlsoap.org/soap/encoding/""><word xsi:type=""xsd:string"">example2</word></urn:getRandomGoogleSearch></soapenv:Body></soapenv:Envelope>";
+            string request = new RandomGoogleSearchMessageBuilder().Build();
 
-            byte[] data = Encoding.UTF8.GetBytes(request);
 
-            var webRequest = HttpWebRequest.Create("http://www.ghettodriveby.com/soap/index.php");
-            webRequest.Method = "POST";
-            webRequest.ContentType = "text/xml;charset=UTF-8";
-            webRequest.Headers.Add("SOAPAction", "urn:RandomGoogleSearch#RandomGoogleSearch#getRandomGoogleSearch");
+            var post = new HttpPost("http://www.ghettodriveby.com/soap/index.php", request, "text/xml", "utf-8");
+            post.AddHeader("SOAPAction", "urn:RandomGoogleSearch#RandomGoogleSearch#getRandomGoogleSearch");
 
-            webRequest.ContentLength = data.Length;
+            var postContent = new HttpGateway().Post(post);
 
-            var stream = webRequest.GetRequestStream();
-            stream.Write(data, 0, data.Length);
-            stream.Close();
+            Console.WriteLine("content: " + postContent);
+            Console.WriteLine("-------");
 
-            var response = (HttpWebResponse) webRequest.GetResponse();
-            var statusCode = response.StatusCode;
+            var getContent = new HttpGateway().Get(new HttpGet("http://www.google.co.uk/"));
+            Console.WriteLine(getContent);
 
-            var dataStream = response.GetResponseStream();
-            var responseStream = new StreamReader(dataStream);
-            var content = responseStream.ReadToEnd();
-
-            responseStream.Close();
-            dataStream.Close();
-            response.Close();   
-
-            Console.WriteLine("status code: " + statusCode);
-            Console.WriteLine("content: " + content);
             Console.ReadLine();
+
+
         }
     }
 }
