@@ -14,7 +14,7 @@ namespace SoapWebservices
             var request = HttpWebRequest.Create(post.Uri);
             request.Method = post.Method;
             request.ContentType = post.ContentType;
-            request.ContentLength = data.Length;
+            request.ContentLength = post.ContentLength;
 
             foreach (var headerName in post.Headers.Keys)
             {
@@ -25,7 +25,7 @@ namespace SoapWebservices
             {
                 requestStream.Write(data, 0, data.Length);
             }
-            
+
             var response = (HttpWebResponse)request.GetResponse();
             var statusCode = response.StatusCode;
             var statusDescription = response.StatusDescription;

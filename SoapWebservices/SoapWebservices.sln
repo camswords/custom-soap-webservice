@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual C# Express 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoapWebservices", "SoapWebservices\SoapWebservices.csproj", "{66DDA738-CA3C-43B5-AEE3-F28698AB8FB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoapWebservicesTests", "SoapWebservicesTests\SoapWebservicesTests.csproj", "{8410EC32-C330-4775-8261-95A0F4E1D2EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{66DDA738-CA3C-43B5-AEE3-F28698AB8FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66DDA738-CA3C-43B5-AEE3-F28698AB8FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66DDA738-CA3C-43B5-AEE3-F28698AB8FB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8410EC32-C330-4775-8261-95A0F4E1D2EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8410EC32-C330-4775-8261-95A0F4E1D2EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8410EC32-C330-4775-8261-95A0F4E1D2EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8410EC32-C330-4775-8261-95A0F4E1D2EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

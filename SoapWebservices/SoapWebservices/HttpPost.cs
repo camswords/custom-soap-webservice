@@ -36,6 +36,11 @@ namespace SoapWebservices
             get { return string.Format("{0};charset={1}", contentType, charset); }
         }
 
+        public long ContentLength
+        {
+            get { return ToBytes().Length; }
+        }
+
         public byte[] ToBytes()
         {
             return Encoding.GetEncoding(charset).GetBytes(data);

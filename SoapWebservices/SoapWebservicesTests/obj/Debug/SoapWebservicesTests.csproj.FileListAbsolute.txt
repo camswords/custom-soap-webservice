@@ -1,0 +1,9 @@
+C:\development\learningProjects\custom-soap-webservices-.net\SoapWebservices\SoapWebservicesTests\bin\Debug\SoapWebservicesTests.dll
+C:\development\learningProjects\custom-soap-webservices-.net\SoapWebservices\SoapWebservicesTests\bin\Debug\SoapWebservicesTests.pdb
+C:\development\learningProjects\custom-soap-webservices-.net\SoapWebservices\SoapWebservicesTests\bin\Debug\nunit.framework.dll
+C:\development\learningProjects\custom-soap-webservices-.net\SoapWebservices\SoapWebservicesTests\bin\Debug\nunit.framework.xml
+C:\development\learningProjects\custom-soap-webservices-.net\SoapWebservices\SoapWebservicesTests\obj\Debug\ResolveAssemblyReference.cache
+C:\development\learningProjects\custom-soap-webservices-.net\SoapWebservices\SoapWebservicesTests\obj\Debug\SoapWebservicesTests.dll
+C:\development\learningProjects\custom-soap-webservices-.net\SoapWebservices\SoapWebservicesTests\obj\Debug\SoapWebservicesTests.pdb
+C:\development\learningProjects\custom-soap-webservices-.net\SoapWebservices\SoapWebservicesTests\bin\Debug\SoapWebservices.exe
+C:\development\learningProjects\custom-soap-webservices-.net\SoapWebservices\SoapWebservicesTests\bin\Debug\SoapWebservices.pdb
