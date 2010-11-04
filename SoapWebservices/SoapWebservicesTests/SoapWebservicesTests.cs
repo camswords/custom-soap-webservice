@@ -19,6 +19,19 @@ namespace SoapWebservicesTests
     {
 
         [Test]
+        public void should_send_request_for_a_get_method()
+        {
+            var server = new WebServer((request, responseStream) =>
+            {
+                Assert.That(request, Text.Contains("GET / HTTP/1.1"));
+            });
+
+            server.Start();
+
+            new HttpGateway().Get(new HttpGet("http://localhost:" + server.PortNumber + "/"));
+        }
+
+        [Test]
         public void should_parse_response_for_get_request()
         {
             var server = new WebServer((request, responseStream) =>
@@ -28,7 +41,9 @@ namespace SoapWebservicesTests
                 responseStream.Write("yeah");
             });
 
-            var response = new HttpGateway().Get(new HttpGet("http://localhost:5021"));
+            server.Start();
+
+            var response = new HttpGateway().Get(new HttpGet("http://localhost:" + server.PortNumber));
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
             Assert.That(response.StatusDescription, Is.EqualTo("OK"));

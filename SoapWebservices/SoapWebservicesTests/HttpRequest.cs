@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Net.Sockets;
+using System.Text;
 
 namespace SoapWebservicesTests
 {
@@ -16,16 +17,16 @@ namespace SoapWebservicesTests
         {
             var reader = new StreamReader(connection);
 
-            var request = "";
+            var request = new StringBuilder();
             string line = null;
 
             do
             {
                 line = reader.ReadLine();
-                request += line + "\n";
+                request.AppendLine(line);
             } while (line.Length != 0);
 
-            return request;
+            return request.ToString();
         }
     }
 }

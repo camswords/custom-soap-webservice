@@ -11,20 +11,25 @@ namespace SoapWebservicesTests
         private TcpListener serverSocket;
         private IRequestHandler requestHandler;
         private Thread listeningThread;
+        private int portNumber;
 
         public WebServer(Action<string, StreamWriter> responseWriter)
         {
             this.requestHandler = new DelegateRequestHandler(responseWriter);
+            this.portNumber = new PortNumber().LocateUnused();
+        }
 
-            var localhost = Dns.Resolve("localhost").AddressList[0];
-            serverSocket = new TcpListener(localhost, 5021);
+        public void Start()
+        {
+            var localhost = Dns.GetHostEntry("localhost").AddressList[0];
+            serverSocket = new TcpListener(localhost, portNumber);
             serverSocket.Start();
 
             listeningThread = new Thread(Listen);
             listeningThread.Start();
         }
 
-        public void Listen()
+        private void Listen()
         {
             var tcpClient = serverSocket.AcceptTcpClient();
             var clientConnection = tcpClient.GetStream();
@@ -32,12 +37,25 @@ namespace SoapWebservicesTests
             var response = new StreamWriter(clientConnection);
             var request = new HttpRequest(clientConnection).ReadHeader();
 
-            requestHandler.Handle(request, response);
-
-            response.Flush();
-            clientConnection.Dispose();
+            try
+            {
+                requestHandler.Handle(request, response);
+                response.Flush();
+            }
+            finally
+            {
+                new SuppressExceptions().On(() => response.Dispose());
+                new SuppressExceptions().On(() => clientConnection.Dispose());
+                new SuppressExceptions().On(() => tcpClient.Close());
+                new SuppressExceptions().On(() => serverSocket.Stop());
+            }
 
             listeningThread.Join(10000);
+        }
+
+        public int PortNumber
+        {
+            get { return portNumber; }
         }
     }
 }
