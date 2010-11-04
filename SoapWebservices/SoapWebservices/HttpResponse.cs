@@ -29,5 +29,10 @@ namespace SoapWebservices
         {
             get { return statusDescription; }
         }
+
+        public bool Failed
+        {
+            get { return (int) statusCode >= 400; } 
+        }
     }
 }

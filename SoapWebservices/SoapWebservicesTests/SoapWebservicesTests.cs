@@ -24,11 +24,14 @@ namespace SoapWebservicesTests
             var server = new WebServer((request, responseStream) =>
             {
                 Assert.That(request, Text.Contains("GET / HTTP/1.1"));
+                
+                responseStream.WriteLine("HTTP/1.1 200 OK");
+                responseStream.WriteLine("");
             });
 
             server.Start();
 
-            new HttpGateway().Get(new HttpGet("http://localhost:" + server.PortNumber + "/"));
+            new HttpGateway().Get(new HttpGet(string.Format("http://localhost:{0}/", server.PortNumber)));
         }
 
         [Test]
@@ -43,11 +46,32 @@ namespace SoapWebservicesTests
 
             server.Start();
 
-            var response = new HttpGateway().Get(new HttpGet("http://localhost:" + server.PortNumber));
+            var response = new HttpGateway().Get(new HttpGet(string.Format("http://localhost:{0}", server.PortNumber)));
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
             Assert.That(response.StatusDescription, Is.EqualTo("OK"));
             Assert.That(response.Content, Is.EqualTo("yeah"));
+            Assert.That(response.Failed, Is.False);
+        }
+
+        [Test]
+        public void should_return_failed_response_when_server_returns_internal_server_error()
+        {
+            var server = new WebServer((request, responseStream) =>
+            {
+                responseStream.WriteLine("HTTP/1.1 500 Internal Server Error");
+                responseStream.WriteLine("");
+                responseStream.Write("i just dont know what to do with myself...");
+            });
+
+            server.Start();
+
+            var response = new HttpGateway().Get(new HttpGet(string.Format("http://localhost:{0}", server.PortNumber)));
+
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+            Assert.That(response.StatusDescription, Is.EqualTo("Internal Server Error"));
+            Assert.That(response.Content, Is.EqualTo("i just dont know what to do with myself..."));
+            Assert.That(response.Failed, Is.True);
         }
     }
 }

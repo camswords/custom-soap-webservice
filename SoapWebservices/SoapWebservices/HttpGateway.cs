@@ -45,18 +45,36 @@ namespace SoapWebservices
         {
             var request = HttpWebRequest.Create(get.Uri);
 
-            var response = (HttpWebResponse)request.GetResponse();
-            var statusCode = response.StatusCode;
+            try
+            {
+                var response = (HttpWebResponse)request.GetResponse();
 
-            var dataStream = response.GetResponseStream();
-            var responseStream = new StreamReader(dataStream);
-            var content = responseStream.ReadToEnd();
+                var dataStream = response.GetResponseStream();
+                var responseStream = new StreamReader(dataStream);
+                var content = responseStream.ReadToEnd();
 
-            responseStream.Close();
-            dataStream.Close();
-            response.Close();
+                responseStream.Close();
+                dataStream.Close();
+                response.Close();
 
-            return new HttpResponse(response.StatusCode, response.StatusDescription, content);
+                return new HttpResponse(response.StatusCode, response.StatusDescription, content);
+            }
+            catch (WebException e)
+            {
+                var errorResponse = (HttpWebResponse) e.Response;
+
+                var dataStream = errorResponse.GetResponseStream();
+                var responseStream = new StreamReader(dataStream);
+                var content = responseStream.ReadToEnd();
+
+                responseStream.Close();
+                dataStream.Close();
+                errorResponse.Close();
+
+                return new HttpResponse(errorResponse.StatusCode, errorResponse.StatusDescription, content);
+
+
+            }
         }
     }
 }
