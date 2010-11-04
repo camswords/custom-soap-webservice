@@ -2,7 +2,7 @@
 
 namespace SoapWebservicesTests
 {
-    public interface RequestHandler
+    public interface IRequestHandler
     {
         void Handle(string request, StreamWriter response);
     }

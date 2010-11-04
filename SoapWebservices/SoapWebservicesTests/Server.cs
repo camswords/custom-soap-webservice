@@ -1,17 +1,18 @@
 ﻿using System.Net.Sockets;
 using System.IO;
 using System.Net;
+using System;
 
 namespace SoapWebservicesTests
 {
     public class Server
     {
         private TcpListener serverSocket;
-        private RequestHandler requestHandler;
+        private IRequestHandler requestHandler;
 
-        public Server(RequestHandler requestHandler)
+        public Server(Action<StreamWriter> responseWriter)
         {
-            this.requestHandler = requestHandler;
+            this.requestHandler = new DelegateRequestHandler(responseWriter);
 
             var localhost = Dns.Resolve("localhost").AddressList[0];
             serverSocket = new TcpListener(localhost, 5021);

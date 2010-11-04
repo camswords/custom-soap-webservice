@@ -49,8 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DelegateRequestHandler.cs" />
     <Compile Include="HttpRequest.cs" />
-    <Compile Include="RequestHandler.cs" />
+    <Compile Include="IRequestHandler.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="SoapWebservicesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

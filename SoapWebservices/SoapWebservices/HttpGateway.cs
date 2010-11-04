@@ -41,13 +41,12 @@ namespace SoapWebservices
             return new HttpResponse(statusCode, statusDescription, content);
         }
 
-        public string Get(HttpGet get)
+        public HttpResponse Get(HttpGet get)
         {
             var request = HttpWebRequest.Create(get.Uri);
 
             var response = (HttpWebResponse)request.GetResponse();
             var statusCode = response.StatusCode;
-            Console.WriteLine(statusCode);
 
             var dataStream = response.GetResponseStream();
             var responseStream = new StreamReader(dataStream);
@@ -57,7 +56,7 @@ namespace SoapWebservices
             dataStream.Close();
             response.Close();
 
-            return content;
+            return new HttpResponse(response.StatusCode, response.StatusDescription, content);
         }
     }
 }

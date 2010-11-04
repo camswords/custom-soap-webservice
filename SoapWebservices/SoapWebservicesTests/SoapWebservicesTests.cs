@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
+using SoapWebservices;
 
 namespace SoapWebservicesTests
 {
@@ -17,39 +18,26 @@ namespace SoapWebservicesTests
     public class SoapWebservicesTests
     {
 
-        public class AnonymousRequestHandler : RequestHandler
-        {
-            public void Handle(string request, StreamWriter response)
-            {
-                response.WriteLine("HTTP/1.1 200 OK");
-                response.WriteLine("");
-                response.Write("yeah");
-            }
-        }
-
         [Test]
         public void should_return_response()
         {
-            var svr = new Server(new AnonymousRequestHandler());
+            var svr = new Server(reponseStream =>
+            {
+                reponseStream.WriteLine("HTTP/1.1 200 OK");
+                reponseStream.WriteLine("");
+                reponseStream.Write("yeah");
+            });
    
             Thread thread = new Thread(svr.Listen);
             thread.Start();
 
-            var request = WebRequest.Create("http://localhost:5021");
-            var response = (HttpWebResponse) request.GetResponse();
+            var response = new HttpGateway().Get(new HttpGet("http://localhost:5021"));
 
-            var contents = "test.no.contents.returned";
-
-            using(var s = new StreamReader(response.GetResponseStream()))
-            {
-                contents = s.ReadToEnd();
-            }
-            
             thread.Join(10000);
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
             Assert.That(response.StatusDescription, Is.EqualTo("OK"));
-            Assert.That(contents, Is.EqualTo("yeah"));
+            Assert.That(response.Content, Is.EqualTo("yeah"));
         }
     }
 }
