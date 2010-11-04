@@ -5,16 +5,16 @@ namespace SoapWebservicesTests
 {
     public class DelegateRequestHandler : IRequestHandler
     {
-        private Action<StreamWriter> responseWriter;
+        private Action<string, StreamWriter> responseWriter;
 
-        public DelegateRequestHandler(Action<StreamWriter> responseWriter)
+        public DelegateRequestHandler(Action<string, StreamWriter> responseWriter)
         {
             this.responseWriter = responseWriter;
         }
 
         public void Handle(string request, StreamWriter response)
         {
-            responseWriter.Invoke(response);
+            responseWriter.Invoke(request, response);
         }
     }
 }

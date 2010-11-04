@@ -19,21 +19,16 @@ namespace SoapWebservicesTests
     {
 
         [Test]
-        public void should_return_response()
+        public void should_parse_response_for_get_request()
         {
-            var svr = new Server(reponseStream =>
+            var server = new WebServer((request, responseStream) =>
             {
-                reponseStream.WriteLine("HTTP/1.1 200 OK");
-                reponseStream.WriteLine("");
-                reponseStream.Write("yeah");
+                responseStream.WriteLine("HTTP/1.1 200 OK");
+                responseStream.WriteLine("");
+                responseStream.Write("yeah");
             });
-   
-            Thread thread = new Thread(svr.Listen);
-            thread.Start();
 
             var response = new HttpGateway().Get(new HttpGet("http://localhost:5021"));
-
-            thread.Join(10000);
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
             Assert.That(response.StatusDescription, Is.EqualTo("OK"));
