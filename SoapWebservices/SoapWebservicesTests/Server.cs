@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System;
 using System.Threading;
+using SoapWebservices;
 
 namespace SoapWebservicesTests
 {

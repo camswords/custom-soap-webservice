@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
+﻿using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using System.Net;
-using System.Net.Sockets;
-using System.IO;
-using System.Threading;
 using SoapWebservices;
 
 namespace SoapWebservicesTests
