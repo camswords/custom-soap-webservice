@@ -17,54 +17,22 @@ namespace SoapWebservicesTests
     public class SoapWebservicesTests
     {
 
-        public class Server 
+        public class AnonymousRequestHandler : RequestHandler
         {
-            ManualResetEvent tcpConnectedClient;
-            TcpListener serverSocket;
-
-            public Server()
+            public void Handle(string request, StreamWriter response)
             {
-                tcpConnectedClient = new ManualResetEvent(false);
-
-                var localhost = Dns.Resolve("localhost").AddressList[0];
-                serverSocket = new TcpListener(localhost, 5021);
-                serverSocket.Start();
-            }
-
-           
-            public void Begin()
-            {
-                var tcpClient = serverSocket.AcceptTcpClient();
-
-                var stream = tcpClient.GetStream();
-                var reader = new StreamReader(stream);
-                var writer = new StreamWriter(stream);
-
-                var request = "";
-
-                string line = null;
-                do
-                {
-                    line = reader.ReadLine();
-                    request += line + "\n";
-                } while (line.Length != 0);
-
-
-                writer.WriteLine("HTTP/1.1 200 OK");
-                writer.WriteLine("");
-                writer.Write("yeah");
-                writer.Flush();
-
-                stream.Dispose();
+                response.WriteLine("HTTP/1.1 200 OK");
+                response.WriteLine("");
+                response.Write("yeah");
             }
         }
 
         [Test]
         public void should_return_response()
         {
-            var svr = new Server();
+            var svr = new Server(new AnonymousRequestHandler());
    
-            Thread thread = new Thread(svr.Begin);
+            Thread thread = new Thread(svr.Listen);
             thread.Start();
 
             var request = WebRequest.Create("http://localhost:5021");
@@ -82,14 +50,6 @@ namespace SoapWebservicesTests
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
             Assert.That(response.StatusDescription, Is.EqualTo("OK"));
             Assert.That(contents, Is.EqualTo("yeah"));
-        }
-    }
-
-    public static class Printer
-    {
-        public static void Print(string message)
-        {
-            Console.WriteLine(Thread.CurrentThread.ManagedThreadId + ": " + message);
         }
     }
 }
