@@ -17,7 +17,7 @@ namespace SoapWebservicesTests
         public WebServer(Action<string, StreamWriter> responseWriter)
         {
             this.requestHandler = new DelegateRequestHandler(responseWriter);
-            this.portNumber = new PortNumber().LocateUnused();
+            this.portNumber = new PortNumbers().LocateUnused();
         }
 
         public void Start()

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SoapWebservicesTests
 {
-    public class PortNumber
+    public class PortNumbers
     {
         public int LocateUnused()
         {
