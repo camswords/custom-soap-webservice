@@ -41,7 +41,7 @@ namespace SoapWebservicesTests.Http
             var clientConnection = tcpClient.GetStream();
 
             var response = new StreamWriter(clientConnection);
-            var request = new HttpRequest(clientConnection).ReadHeader();
+            var request = new HttpRequestReader().Read(clientConnection);
 
             try
             {

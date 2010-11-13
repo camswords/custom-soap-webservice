@@ -1,8 +1,10 @@
 ﻿using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using System.Net;
+using System.Text;
 using SoapWebservices;
 using SoapWebservicesTests.Http;
+using System.IO;
 
 namespace SoapWebservicesTests
 {
@@ -60,6 +62,37 @@ namespace SoapWebservicesTests
             Assert.That(response.StatusDescription, Is.EqualTo("Internal Server Error"));
             Assert.That(response.Content, Is.EqualTo("i just dont know what to do with myself..."));
             Assert.That(response.Failed, Is.True);
+        }
+
+        [Test]
+        public void should_post_empty_request_to_server()
+        {
+            var requestHandler = new RecordingRequestHandler();
+            var server = new WebServer(requestHandler);
+            server.Start();
+
+            var uri = string.Format("http://localhost:{0}", server.PortNumber);
+            new HttpGateway().Post(new HttpPost(uri, string.Empty, "text/xml", "utf-8"));
+
+            Assert.That(requestHandler.LastRecordedRequest, Text.Contains("POST / HTTP/1.1"));
+            Assert.That(requestHandler.LastRecordedRequest, Text.Contains("Content-Type: text/xml;charset=utf-8"));
+            Assert.That(requestHandler.LastRecordedRequest, Text.Contains("Content-Length: 0"));
+        }
+
+        [Test]
+        public void should_post_request_with_data_to_server()
+        {
+            var requestHandler = new RecordingRequestHandler();
+            var server = new WebServer(requestHandler);
+            server.Start();
+
+            var uri = string.Format("http://localhost:{0}", server.PortNumber);
+            new HttpGateway().Post(new HttpPost(uri, "test.data", "text/xml", "utf-8"));
+
+            var utfEncodedData = new UTF8Encoding().GetBytes("test.data");
+
+            Assert.That(requestHandler.LastRecordedRequest, Text.Contains("POST / HTTP/1.1"));
+            Assert.That(requestHandler.LastRecordedRequest, Text.Contains("Content-Length: " + utfEncodedData.Length));
         }
     }
 }
