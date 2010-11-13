@@ -53,6 +53,7 @@
     <Compile Include="Http\HttpRequest.cs" />
     <Compile Include="Http\IRequestHandler.cs" />
     <Compile Include="Http\PortNumbers.cs" />
+    <Compile Include="Http\RecordingRequestHandler.cs" />
     <Compile Include="Http\Server.cs" />
     <Compile Include="SoapWebservicesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

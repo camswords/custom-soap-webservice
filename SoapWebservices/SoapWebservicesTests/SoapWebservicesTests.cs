@@ -13,17 +13,13 @@ namespace SoapWebservicesTests
         [Test]
         public void should_send_request_for_a_get_method()
         {
-            var server = new WebServer((request, responseStream) =>
-            {
-                Assert.That(request, Text.Contains("GET / HTTP/1.1"));
-                
-                responseStream.WriteLine("HTTP/1.1 200 OK");
-                responseStream.WriteLine("");
-            });
-
+            var recordingRequestHandler = new RecordingRequestHandler();
+            var server = new WebServer(recordingRequestHandler);
             server.Start();
 
             new HttpGateway().Get(new HttpGet(string.Format("http://localhost:{0}/", server.PortNumber)));
+
+            Assert.That(recordingRequestHandler.LastRecordedRequest, Text.Contains("GET / HTTP/1.1"));
         }
 
         [Test]
@@ -47,7 +43,7 @@ namespace SoapWebservicesTests
         }
 
         [Test]
-        public void should_return_failed_response_when_server_returns_internal_server_error()
+        public void should_return_failed_response_when_server_returns_internal_server_error_on_get_request()
         {
             var server = new WebServer((request, responseStream) =>
             {

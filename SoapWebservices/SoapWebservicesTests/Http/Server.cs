@@ -14,9 +14,14 @@ namespace SoapWebservicesTests.Http
         private Thread listeningThread;
         private int portNumber;
 
-        public WebServer(Action<string, StreamWriter> responseWriter)
+        public WebServer(Action<string, StreamWriter> requestHandler) : 
+           this(new DelegateRequestHandler(requestHandler))
         {
-            this.requestHandler = new DelegateRequestHandler(responseWriter);
+        }
+
+        public WebServer(IRequestHandler requestHandler)
+        {
+            this.requestHandler = requestHandler;
             this.portNumber = new PortNumbers().LocateUnused();
         }
 
