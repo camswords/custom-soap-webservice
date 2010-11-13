@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using SoapWebservices;
 
-namespace SoapWebservicesTests
+namespace SoapWebservicesTests.Http
 {
     public class WebServer
     {

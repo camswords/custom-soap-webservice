@@ -49,11 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DelegateRequestHandler.cs" />
-    <Compile Include="HttpRequest.cs" />
-    <Compile Include="IRequestHandler.cs" />
-    <Compile Include="PortNumber.cs" />
-    <Compile Include="Server.cs" />
+    <Compile Include="Http\DelegateRequestHandler.cs" />
+    <Compile Include="Http\HttpRequest.cs" />
+    <Compile Include="Http\IRequestHandler.cs" />
+    <Compile Include="Http\PortNumbers.cs" />
+    <Compile Include="Http\Server.cs" />
     <Compile Include="SoapWebservicesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

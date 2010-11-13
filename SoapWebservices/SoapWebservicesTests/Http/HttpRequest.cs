@@ -2,7 +2,7 @@
 using System.Net.Sockets;
 using System.Text;
 
-namespace SoapWebservicesTests
+namespace SoapWebservicesTests.Http
 {
     public class HttpRequest
     {

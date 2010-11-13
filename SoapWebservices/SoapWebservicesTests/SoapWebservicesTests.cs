@@ -2,6 +2,7 @@
 using NUnit.Framework.SyntaxHelpers;
 using System.Net;
 using SoapWebservices;
+using SoapWebservicesTests.Http;
 
 namespace SoapWebservicesTests
 {
