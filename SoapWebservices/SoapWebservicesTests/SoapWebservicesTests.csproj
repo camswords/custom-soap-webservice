@@ -52,6 +52,7 @@
     <Compile Include="Http\DelegateRequestHandler.cs" />
     <Compile Include="Http\ExceptionHandlingRequestHandler.cs" />
     <Compile Include="Http\HttpRequestReader.cs" />
+    <Compile Include="Http\HttpRequest.cs" />
     <Compile Include="Http\IRequestHandler.cs" />
     <Compile Include="Http\PortNumbers.cs" />
     <Compile Include="Http\RecordingRequestHandler.cs" />

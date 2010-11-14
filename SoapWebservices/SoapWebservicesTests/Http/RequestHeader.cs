@@ -12,16 +12,17 @@ namespace SoapWebservicesTests.Http
             this.header = header;
         }
 
-        public string GetValue(string key)
+        public string GetContentEncoding()
         {
-            var regex = new Regex(key + ": (.*)");
-            var match = regex.Match(header);
+            var contentType = GetString("Content-Type");
+            contentType = contentType.Substring(contentType.IndexOf(";"));
+            contentType = contentType.Replace("charset=", "");
+            return contentType.Replace(";", "");
+        }
 
-            if (!match.Success)
-            {
-                throw new ArgumentException(string.Format("failed to find header identified by key {0} in {1}", key, header));
-            }
-            return match.Groups[1].Value.Trim();
+        public int GetContentLength()
+        {
+            return int.Parse(GetString("Content-Length"));
         }
 
         public bool HasBody()
@@ -39,6 +40,18 @@ namespace SoapWebservicesTests.Http
                 throw new ArgumentException(string.Format("could not read method from header {0}", header));
             }
             return match.Groups[1].Value;
+        }
+
+        private string GetString(string key)
+        {
+            var regex = new Regex(key + ": (.*)");
+            var match = regex.Match(header);
+
+            if (!match.Success)
+            {
+                throw new ArgumentException(string.Format("failed to find header identified by key {0} in {1}", key, header));
+            }
+            return match.Groups[1].Value.Trim();
         }
 
         public string AsString()

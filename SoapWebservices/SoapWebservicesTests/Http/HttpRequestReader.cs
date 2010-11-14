@@ -11,15 +11,13 @@ namespace SoapWebservicesTests.Http
         {
             var header = ReadHeader(connection);
 
-            var request = new StringWriter();
-            request.Write(header.AsString());
-
             if (header.HasBody())
             {
-                request.Write(ReadBody(connection, header));
+                var body = ReadBody(connection, header);
+                return new HttpRequest(header, body).GetRawContent();
             }
 
-            return request.ToString();
+            return new HttpRequest(header).GetRawContent();
         }
 
         public RequestHeader ReadHeader(NetworkStream connection)
@@ -37,20 +35,15 @@ namespace SoapWebservicesTests.Http
             return new RequestHeader(request.ToString());
         }
 
-        public string ReadBody(NetworkStream connection, RequestHeader header)
+        public RequestBody ReadBody(NetworkStream connection, RequestHeader header)
         {
-            var contentLength = int.Parse(header.GetValue("Content-Length"));
-            var encoding = header.GetValue("Content-Type");
-            encoding = encoding.Substring(encoding.IndexOf(";"));
-            encoding = encoding.Replace("charset=", "");
-            encoding = encoding.Replace(";", "");
-            
-            var requestReader = new StreamReader(connection, Encoding.GetEncoding(encoding));
+            var encoding = Encoding.GetEncoding(header.GetContentEncoding());
+            var requestReader = new StreamReader(connection, encoding);
 
-            var body = new char[contentLength];
-            requestReader.Read(body, 0, contentLength);
+            var body = new char[header.GetContentLength()];
+            requestReader.Read(body, 0, header.GetContentLength());
             
-            return new RequestBody(body).GetContent();
+            return new RequestBody(body);
         }
     }
 }

@@ -90,10 +90,8 @@ namespace SoapWebservicesTests
             var uri = string.Format("http://localhost:{0}", server.PortNumber);
             new HttpGateway().Post(new HttpPost(uri, "test.data", "text/xml", "utf-8"));
 
-            var utfEncodedData = new UTF8Encoding().GetBytes("test.data");
-
             Assert.That(requestHandler.LastRecordedRequest, Text.Contains("POST / HTTP/1.1"));
-            Assert.That(requestHandler.LastRecordedRequest, Text.Contains("Content-Length: " + utfEncodedData.Length));
+            Assert.That(requestHandler.LastRecordedRequest, Text.Contains("Content-Length: 9"));
             Assert.That(requestHandler.LastRecordedRequest, Text.Contains("test.data"));
         }
     }
