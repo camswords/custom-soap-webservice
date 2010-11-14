@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System;
 
-namespace SoapWebservicesTests.Http
+namespace SoapWebservicesTests.Http.Request
 {
     public class RequestHeader
     {

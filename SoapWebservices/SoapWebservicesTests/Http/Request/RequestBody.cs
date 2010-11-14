@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace SoapWebservicesTests.Http
+namespace SoapWebservicesTests.Http.Request
 {
     public class RequestBody
     {

@@ -1,6 +1,7 @@
 ﻿using System.IO;
+using SoapWebservicesTests.Http.Request;
 
-namespace SoapWebservicesTests.Http
+namespace SoapWebservicesTests.Http.RequestHandler
 {
     public interface IRequestHandler
     {

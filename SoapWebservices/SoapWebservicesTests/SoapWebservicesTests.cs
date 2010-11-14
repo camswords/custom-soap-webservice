@@ -6,6 +6,7 @@ using SoapWebservices;
 using SoapWebservicesTests.Http;
 using System.IO;
 using System;
+using SoapWebservicesTests.Http.RequestHandler;
 
 namespace SoapWebservicesTests
 {

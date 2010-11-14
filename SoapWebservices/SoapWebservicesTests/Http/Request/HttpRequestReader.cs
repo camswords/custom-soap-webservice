@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using System.Text;
 using System;
 
-namespace SoapWebservicesTests.Http
+namespace SoapWebservicesTests.Http.Request
 {
     public class HttpRequestReader
     {

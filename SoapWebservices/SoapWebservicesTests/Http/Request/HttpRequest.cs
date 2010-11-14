@@ -1,5 +1,5 @@
 ﻿
-namespace SoapWebservicesTests.Http
+namespace SoapWebservicesTests.Http.Request
 {
     public class HttpRequest
     {

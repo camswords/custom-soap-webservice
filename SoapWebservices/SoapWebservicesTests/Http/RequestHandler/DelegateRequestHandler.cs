@@ -1,7 +1,8 @@
 ﻿using System.IO;
 using System;
+using SoapWebservicesTests.Http.Request;
 
-namespace SoapWebservicesTests.Http
+namespace SoapWebservicesTests.Http.RequestHandler
 {
     public class DelegateRequestHandler : IRequestHandler
     {
