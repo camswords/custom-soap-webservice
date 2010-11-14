@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Http\RequestHandler\DelegateRequestHandler.cs" />
     <Compile Include="Http\RequestHandler\ExceptionHandlingRequestHandler.cs" />
+    <Compile Include="Http\Request\HttpRequestBodyReader.cs" />
+    <Compile Include="Http\Request\HttpRequestHeaderReader.cs" />
     <Compile Include="Http\Request\HttpRequestReader.cs" />
     <Compile Include="Http\Request\HttpRequest.cs" />
     <Compile Include="Http\RequestHandler\IRequestHandler.cs" />
