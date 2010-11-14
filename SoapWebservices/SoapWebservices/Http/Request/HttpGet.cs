@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 
-namespace SoapWebservices.Http.Method
+namespace SoapWebservices.Http.Request
 {
     public class HttpGet : HttpMethod
     {

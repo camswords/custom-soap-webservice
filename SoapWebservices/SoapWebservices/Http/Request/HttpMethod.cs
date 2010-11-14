@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SoapWebservices.Http.Method
+namespace SoapWebservices.Http.Request
 {
     public interface HttpMethod
     {

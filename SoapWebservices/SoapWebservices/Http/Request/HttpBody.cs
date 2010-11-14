@@ -1,5 +1,5 @@
 ﻿
-namespace SoapWebservices.Http.Method
+namespace SoapWebservices.Http.Request
 {
     public class HttpBody
     {

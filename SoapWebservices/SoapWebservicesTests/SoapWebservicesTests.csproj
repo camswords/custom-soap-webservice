@@ -56,7 +56,7 @@
     <Compile Include="Http\Request\Reader\HttpRequestReader.cs" />
     <Compile Include="Http\Request\HttpRequest.cs" />
     <Compile Include="Http\Request\Handler\IRequestHandler.cs" />
-    <Compile Include="Http\PortNumbers.cs" />
+    <Compile Include="Http\Utilities\PortNumbers.cs" />
     <Compile Include="Http\Request\Handler\RecordingRequestHandler.cs" />
     <Compile Include="Http\Request\RequestBody.cs" />
     <Compile Include="Http\Request\RequestHeader.cs" />

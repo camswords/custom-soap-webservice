@@ -45,11 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Http\Method\HttpBody.cs" />
+    <Compile Include="Http\Request\HttpBody.cs" />
     <Compile Include="Http\HttpGateway.cs" />
-    <Compile Include="Http\Method\HttpGet.cs" />
-    <Compile Include="Http\Method\HttpMethod.cs" />
-    <Compile Include="Http\Method\HttpPost.cs" />
+    <Compile Include="Http\Request\HttpGet.cs" />
+    <Compile Include="Http\Request\HttpMethod.cs" />
+    <Compile Include="Http\Request\HttpPost.cs" />
     <Compile Include="Http\HttpResponse.cs" />
     <Compile Include="Http\HttpResponseFactory.cs" />
     <Compile Include="Http\Utilities\ICollectionExtensions.cs" />
