@@ -15,9 +15,12 @@ namespace SoapWebservicesTests.Http
         public string GetContentEncoding()
         {
             var contentType = GetString("Content-Type");
-            contentType = contentType.Substring(contentType.IndexOf(";"));
-            contentType = contentType.Replace("charset=", "");
-            return contentType.Replace(";", "");
+            var match = new Regex(".*;charset=(.*)").Match(contentType);
+            if (!match.Success)
+            {
+                throw new ArgumentException(string.Format("failed to extract content type from content type header {0}", contentType));
+            }
+            return match.Groups[1].Value;
         }
 
         public int GetContentLength()
