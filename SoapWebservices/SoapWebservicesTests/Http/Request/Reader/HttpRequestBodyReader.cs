@@ -2,7 +2,7 @@
 using System.Net.Sockets;
 using System.Text;
 
-namespace SoapWebservicesTests.Http.Request
+namespace SoapWebservicesTests.Http.Request.Reader
 {
     public class HttpRequestBodyReader
     {

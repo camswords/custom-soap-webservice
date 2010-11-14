@@ -6,6 +6,7 @@ using System.Threading;
 using SoapWebservices;
 using SoapWebservicesTests.Http.RequestHandler;
 using SoapWebservicesTests.Http.Request;
+using SoapWebservicesTests.Http.Request.Reader;
 
 namespace SoapWebservicesTests.Http
 {

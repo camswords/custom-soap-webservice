@@ -1,6 +1,6 @@
 ﻿using System.Net.Sockets;
 
-namespace SoapWebservicesTests.Http.Request
+namespace SoapWebservicesTests.Http.Request.Reader
 {
     public class HttpRequestReader
     {
