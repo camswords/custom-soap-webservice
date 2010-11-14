@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SoapWebservices
+namespace SoapWebservices.Http.Utilities
 {
     public class SuppressExceptions
     {

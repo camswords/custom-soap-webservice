@@ -5,6 +5,7 @@ using System.Text;
 using System.Net;
 using System.IO;
 using SoapWebservices.Http;
+using SoapWebservices.Http.Method;
 
 namespace SoapWebservices
 {

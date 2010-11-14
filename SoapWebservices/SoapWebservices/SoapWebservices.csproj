@@ -45,18 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Http\HttpBody.cs" />
+    <Compile Include="Http\Method\HttpBody.cs" />
     <Compile Include="Http\HttpGateway.cs" />
-    <Compile Include="Http\HttpGet.cs" />
-    <Compile Include="Http\HttpMethod.cs" />
-    <Compile Include="Http\HttpPost.cs" />
+    <Compile Include="Http\Method\HttpGet.cs" />
+    <Compile Include="Http\Method\HttpMethod.cs" />
+    <Compile Include="Http\Method\HttpPost.cs" />
     <Compile Include="Http\HttpResponse.cs" />
     <Compile Include="Http\HttpResponseFactory.cs" />
-    <Compile Include="ICollectionExtensions.cs" />
+    <Compile Include="Http\Utilities\ICollectionExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomGoogleSearchMessageBuilder.cs" />
-    <Compile Include="SuppressExceptions.cs" />
+    <Compile Include="Http\Utilities\SuppressExceptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

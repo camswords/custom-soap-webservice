@@ -7,6 +7,7 @@ using System.IO;
 using System;
 using SoapWebservices.Http;
 using SoapWebservicesTests.Http;
+using SoapWebservices.Http.Method;
 using SoapWebservicesTests.Http.Request.Handler;
 
 namespace SoapWebservicesTests

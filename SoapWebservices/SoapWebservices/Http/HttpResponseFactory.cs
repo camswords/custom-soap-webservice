@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.IO;
+using SoapWebservices.Http.Utilities;
 
 namespace SoapWebservices.Http
 {

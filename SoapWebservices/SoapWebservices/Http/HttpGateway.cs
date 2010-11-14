@@ -3,6 +3,8 @@ using System.IO;
 using System.Text;
 using System;
 using System.Linq;
+using SoapWebservices.Http.Method;
+using SoapWebservices.Http.Utilities;
 
 namespace SoapWebservices.Http
 {

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SoapWebservices.Http
+namespace SoapWebservices.Http.Method
 {
     public class HttpPost : HttpMethod
     {
