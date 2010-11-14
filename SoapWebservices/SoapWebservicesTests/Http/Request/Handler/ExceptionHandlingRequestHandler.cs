@@ -2,7 +2,7 @@
 using System;
 using SoapWebservicesTests.Http.Request;
 
-namespace SoapWebservicesTests.Http.RequestHandler
+namespace SoapWebservicesTests.Http.Request.Handler
 {
     public class ExceptionHandlingRequestHandler : IRequestHandler
     {

@@ -3,10 +3,10 @@ using NUnit.Framework.SyntaxHelpers;
 using System.Net;
 using System.Text;
 using SoapWebservices;
-using SoapWebservicesTests.Http;
 using System.IO;
 using System;
-using SoapWebservicesTests.Http.RequestHandler;
+using SoapWebservicesTests.Http;
+using SoapWebservicesTests.Http.Request.Handler;
 
 namespace SoapWebservicesTests
 {

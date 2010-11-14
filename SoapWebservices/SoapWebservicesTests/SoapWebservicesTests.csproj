@@ -49,15 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Http\RequestHandler\DelegateRequestHandler.cs" />
-    <Compile Include="Http\RequestHandler\ExceptionHandlingRequestHandler.cs" />
+    <Compile Include="Http\Request\Handler\DelegateRequestHandler.cs" />
+    <Compile Include="Http\Request\Handler\ExceptionHandlingRequestHandler.cs" />
     <Compile Include="Http\Request\Reader\HttpRequestBodyReader.cs" />
     <Compile Include="Http\Request\Reader\HttpRequestHeaderReader.cs" />
     <Compile Include="Http\Request\Reader\HttpRequestReader.cs" />
     <Compile Include="Http\Request\HttpRequest.cs" />
-    <Compile Include="Http\RequestHandler\IRequestHandler.cs" />
+    <Compile Include="Http\Request\Handler\IRequestHandler.cs" />
     <Compile Include="Http\PortNumbers.cs" />
-    <Compile Include="Http\RequestHandler\RecordingRequestHandler.cs" />
+    <Compile Include="Http\Request\Handler\RecordingRequestHandler.cs" />
     <Compile Include="Http\Request\RequestBody.cs" />
     <Compile Include="Http\Request\RequestHeader.cs" />
     <Compile Include="Http\Server.cs" />

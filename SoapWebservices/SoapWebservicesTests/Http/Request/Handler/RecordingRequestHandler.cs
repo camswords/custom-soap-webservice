@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using SoapWebservicesTests.Http.Request;
 
-namespace SoapWebservicesTests.Http.RequestHandler
+namespace SoapWebservicesTests.Http.Request.Handler
 {
     public class RecordingRequestHandler : IRequestHandler
     {
