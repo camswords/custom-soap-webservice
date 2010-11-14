@@ -17,19 +17,16 @@ namespace SoapWebservices.Http
             request.Method = httpMethod.Method;
             httpMethod.Headers.Keys.ForEach(name => request.Headers.Add(name, httpMethod.Headers[name]));
 
-            if (httpMethod.CanSendBody())
+            var body = httpMethod.GetBody();
+            request.ContentLength = body.ContentLength;
+
+            if (body.HasContent())
             {
-                var body = httpMethod.GetBody();
-                request.ContentLength = body.ContentLength;
+                request.ContentType = body.ContentType;
 
-                if (body.HasContent())
+                using (var requestStream = request.GetRequestStream())
                 {
-                    request.ContentType = body.ContentType;
-
-                    using (var requestStream = request.GetRequestStream())
-                    {
-                        requestStream.Write(body.Data, 0, body.ContentLength);
-                    }
+                    requestStream.Write(body.Data, 0, body.ContentLength);
                 }
             }
             

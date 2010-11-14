@@ -31,11 +31,6 @@ namespace SoapWebservices.Http.Request
             get { return uri; }
         }
 
-        public bool CanSendBody()
-        {
-            return true;
-        }
-
         public HttpBody GetBody()
         {
             var encodedData = Encoding.GetEncoding(charset).GetBytes(data);

@@ -10,9 +10,6 @@ namespace SoapWebservices.Http.Request
 
         IDictionary<string, string> Headers { get; }
 
-        bool CanSendBody();
-
         HttpBody GetBody();
-
     }
 }

@@ -27,11 +27,6 @@ namespace SoapWebservices.Http.Request
             get { return new Dictionary<string, string>(); }
         }
 
-        public bool CanSendBody()
-        {
-            return false;
-        }
-
         public HttpBody GetBody()
         {
             return HttpBody.EMPTY;
