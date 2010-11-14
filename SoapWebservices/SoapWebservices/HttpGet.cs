@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace SoapWebservices
 {
-    public class HttpGet
+    public class HttpGet : HttpMethod
     {
         private readonly string uri;
 
@@ -19,6 +20,21 @@ namespace SoapWebservices
         public string Uri 
         {
             get { return uri; }
+        }
+
+        public bool HasBody()
+        {
+            return false;
+        }
+
+        public byte[] ToBytes()
+        {
+            throw new Exception("data on a get is not supported");
+        }
+
+        public IDictionary<string, string> Headers
+        {
+            get { return new Dictionary<string, string>(); }
         }
     }
 }

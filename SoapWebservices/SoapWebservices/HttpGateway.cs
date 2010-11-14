@@ -8,18 +8,18 @@ namespace SoapWebservices
 {
     public class HttpGateway
     {
-        public HttpResponse Post(HttpPost post)
+        public HttpResponse Execute(HttpMethod post)
         {
             var request = HttpWebRequest.Create(post.Uri);
             request.Method = post.Method;
 
             if (post.Headers.ContainsKey("Content-Type"))
             {
-                request.ContentType = post.ContentType;
+                request.ContentType = post.Headers["Content-Type"];
             }
             if (post.Headers.ContainsKey("Content-Length"))
             {
-                request.ContentLength = post.ContentLength;
+                request.ContentLength = long.Parse(post.Headers["Content-Length"]);
             }
 
             post.Headers.Keys
@@ -49,18 +49,7 @@ namespace SoapWebservices
 
         public HttpResponse Get(HttpGet get)
         {
-            var request = HttpWebRequest.Create(get.Uri);
-
-            try
-            {
-                var response = (HttpWebResponse)request.GetResponse();
-                return new HttpResponseFactory().Create(response);
-            }
-            catch (WebException e)
-            {
-                var response = (HttpWebResponse) e.Response;
-                return new HttpResponseFactory().Create(response);
-            }
+            return Execute(get);
         }
     }
 }

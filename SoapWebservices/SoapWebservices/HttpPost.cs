@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SoapWebservices
 {
-    public class HttpPost
+    public class HttpPost : HttpMethod
     {
         private readonly string uri;
         private readonly string data;

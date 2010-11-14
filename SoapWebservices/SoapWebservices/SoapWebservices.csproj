@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="HttpGateway.cs" />
     <Compile Include="HttpGet.cs" />
+    <Compile Include="HttpMethod.cs" />
     <Compile Include="HttpPost.cs" />
     <Compile Include="HttpResponse.cs" />
     <Compile Include="HttpResponseFactory.cs" />

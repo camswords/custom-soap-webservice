@@ -20,7 +20,7 @@ namespace SoapWebservicesTests
             var server = new WebServer(recordingRequestHandler);
             server.Start();
 
-            new HttpGateway().Get(new HttpGet(string.Format("http://localhost:{0}/", server.PortNumber)));
+            new HttpGateway().Execute(new HttpGet(string.Format("http://localhost:{0}/", server.PortNumber)));
 
             var recordedRequest = recordingRequestHandler.LastRecordedRequest;
             Assert.That(recordedRequest.StatusLine, Text.Contains("GET / HTTP/1.1"));
@@ -38,7 +38,7 @@ namespace SoapWebservicesTests
 
             server.Start();
 
-            var response = new HttpGateway().Get(new HttpGet(string.Format("http://localhost:{0}", server.PortNumber)));
+            var response = new HttpGateway().Execute(new HttpGet(string.Format("http://localhost:{0}", server.PortNumber)));
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
             Assert.That(response.StatusDescription, Is.EqualTo("OK"));
@@ -58,7 +58,7 @@ namespace SoapWebservicesTests
 
             server.Start();
 
-            var response = new HttpGateway().Get(new HttpGet(string.Format("http://localhost:{0}", server.PortNumber)));
+            var response = new HttpGateway().Execute(new HttpGet(string.Format("http://localhost:{0}", server.PortNumber)));
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
             Assert.That(response.StatusDescription, Is.EqualTo("Internal Server Error"));
@@ -74,7 +74,7 @@ namespace SoapWebservicesTests
             server.Start();
 
             var uri = string.Format("http://localhost:{0}", server.PortNumber);
-            new HttpGateway().Post(new HttpPost(uri, string.Empty, "text/xml", "utf-8"));
+            new HttpGateway().Execute(new HttpPost(uri, string.Empty, "text/xml", "utf-8"));
 
             var recordedRequest = requestHandler.LastRecordedRequest;
             Assert.That(recordedRequest.StatusLine, Is.EqualTo("POST / HTTP/1.1"));
@@ -90,7 +90,7 @@ namespace SoapWebservicesTests
             server.Start();
 
             var uri = string.Format("http://localhost:{0}", server.PortNumber);
-            new HttpGateway().Post(new HttpPost(uri, "test.data", "text/xml", "utf-8"));
+            new HttpGateway().Execute(new HttpPost(uri, "test.data", "text/xml", "utf-8"));
 
             var recordedRequest = requestHandler.LastRecordedRequest;
             Assert.That(recordedRequest.StatusLine, Text.Contains("POST / HTTP/1.1"));
@@ -111,7 +111,7 @@ namespace SoapWebservicesTests
             server.Start();
 
             var uri = "http://localhost:" + server.PortNumber;
-            var response = new HttpGateway().Post(new HttpPost(uri, "test.data", "text/xml", "utf-8"));
+            var response = new HttpGateway().Execute(new HttpPost(uri, "test.data", "text/xml", "utf-8"));
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
             Assert.That(response.StatusDescription, Is.EqualTo("Internal Server Error"));
             Assert.That(response.Content, Is.EqualTo("i just dont know what to do with myself..."));

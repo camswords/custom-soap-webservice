@@ -17,7 +17,7 @@ namespace SoapWebservices
             var post = new HttpPost("http://www.ghettodriveby.com/soap/index.php", request, "text/xml", "utf-8");
             post.AddHeader("SOAPAction", "urn:RandomGoogleSearch#RandomGoogleSearch#getRandomGoogleSearch");
 
-            var response = new HttpGateway().Post(post);
+            var response = new HttpGateway().Execute(post);
 
             Console.WriteLine("content: " + response.Content);
             Console.ReadLine();
