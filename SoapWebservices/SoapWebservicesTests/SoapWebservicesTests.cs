@@ -94,6 +94,7 @@ namespace SoapWebservicesTests
 
             Assert.That(requestHandler.LastRecordedRequest, Text.Contains("POST / HTTP/1.1"));
             Assert.That(requestHandler.LastRecordedRequest, Text.Contains("Content-Length: " + utfEncodedData.Length));
+            Assert.That(requestHandler.LastRecordedRequest, Text.Contains("test.data"));
         }
     }
 }

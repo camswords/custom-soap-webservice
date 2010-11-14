@@ -9,23 +9,22 @@ namespace SoapWebservicesTests.Http
     {
         public string Read(NetworkStream connection)
         {
-            var requestReader = new StreamReader(connection);
-            var header = ReadHeader(requestReader);
+            var header = ReadHeader(connection);
 
             var request = new StringWriter();
-            request.WriteLine(header.AsString());
-            request.WriteLine();
+            request.Write(header.AsString());
 
             if (header.HasBody())
             {
-                request.WriteLine(ReadBody(requestReader, header));
+                request.Write(ReadBody(connection, header));
             }
 
             return request.ToString();
         }
 
-        public RequestHeader ReadHeader(StreamReader requestReader)
+        public RequestHeader ReadHeader(NetworkStream connection)
         {
+            var requestReader = new StreamReader(connection);
             var request = new StringBuilder();
             string line = null;
 
@@ -38,13 +37,20 @@ namespace SoapWebservicesTests.Http
             return new RequestHeader(request.ToString());
         }
 
-        public string ReadBody(StreamReader requestReader, RequestHeader header)
+        public string ReadBody(NetworkStream connection, RequestHeader header)
         {
             var contentLength = int.Parse(header.GetValue("Content-Length"));
-            var body = new char[contentLength];
-            requestReader.ReadBlock(body, 0, contentLength);
+            var encoding = header.GetValue("Content-Type");
+            encoding = encoding.Substring(encoding.IndexOf(";"));
+            encoding = encoding.Replace("charset=", "");
+            encoding = encoding.Replace(";", "");
+            
+            var requestReader = new StreamReader(connection, Encoding.GetEncoding(encoding));
 
-            return new string(body);
+            var body = new char[contentLength];
+            requestReader.Read(body, 0, contentLength);
+            
+            return new RequestBody(body).GetContent();
         }
     }
 }

@@ -55,6 +55,7 @@
     <Compile Include="Http\IRequestHandler.cs" />
     <Compile Include="Http\PortNumbers.cs" />
     <Compile Include="Http\RecordingRequestHandler.cs" />
+    <Compile Include="Http\RequestBody.cs" />
     <Compile Include="Http\RequestHeader.cs" />
     <Compile Include="Http\Server.cs" />
     <Compile Include="SoapWebservicesTests.cs" />
