@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System;
+using System.Linq;
 
 namespace SoapWebservices
 {
@@ -9,21 +10,29 @@ namespace SoapWebservices
     {
         public HttpResponse Post(HttpPost post)
         {
-            byte[] data = post.ToBytes();
-
             var request = HttpWebRequest.Create(post.Uri);
             request.Method = post.Method;
-            request.ContentType = post.ContentType;
-            request.ContentLength = post.ContentLength;
 
-            foreach (var headerName in post.Headers.Keys)
+            if (post.Headers.ContainsKey("Content-Type"))
             {
-                request.Headers.Add(headerName, post.Headers[headerName]);
+                request.ContentType = post.ContentType;
+            }
+            if (post.Headers.ContainsKey("Content-Length"))
+            {
+                request.ContentLength = post.ContentLength;
             }
 
-            using (var requestStream = request.GetRequestStream())
+            post.Headers.Keys
+                .Where(key => !key.Equals("Content-Type") && !key.Equals("Content-Length"))
+                .ToList().ForEach(key => request.Headers.Add(key, post.Headers[key]));
+
+            if (post.HasBody())
             {
-                requestStream.Write(data, 0, data.Length);
+                using (var requestStream = request.GetRequestStream())
+                {
+                    var data = post.ToBytes();
+                    requestStream.Write(data, 0, data.Length);
+                }
             }
 
             try
