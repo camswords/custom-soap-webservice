@@ -50,8 +50,8 @@
     <Compile Include="Http\Request\HttpGet.cs" />
     <Compile Include="Http\Request\HttpMethod.cs" />
     <Compile Include="Http\Request\HttpPost.cs" />
-    <Compile Include="Http\HttpResponse.cs" />
-    <Compile Include="Http\HttpResponseFactory.cs" />
+    <Compile Include="Http\Response\HttpResponse.cs" />
+    <Compile Include="Http\Response\HttpResponseFactory.cs" />
     <Compile Include="Http\Utilities\ICollectionExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

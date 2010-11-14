@@ -2,7 +2,7 @@
 using System.IO;
 using SoapWebservices.Http.Utilities;
 
-namespace SoapWebservices.Http
+namespace SoapWebservices.Http.Response
 {
     public class HttpResponseFactory
     {

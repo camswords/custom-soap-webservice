@@ -4,6 +4,7 @@ using System.Text;
 using System;
 using System.Linq;
 using SoapWebservices.Http.Request;
+using SoapWebservices.Http.Response;
 using SoapWebservices.Http.Utilities;
 
 namespace SoapWebservices.Http
