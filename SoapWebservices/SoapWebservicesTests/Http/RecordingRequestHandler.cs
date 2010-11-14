@@ -4,21 +4,19 @@ namespace SoapWebservicesTests.Http
 {
     public class RecordingRequestHandler : IRequestHandler
     {
-        private string lastRecordedRequest = null;
+        private HttpRequest lastRecordedRequest = null;
 
         public void Handle(HttpRequest request, TextWriter response)
         {
-            lastRecordedRequest = request.GetRawContent();
+            lastRecordedRequest = request;
 
             response.WriteLine("HTTP/1.1 200 OK");
             response.WriteLine("");
         }
 
-        public string LastRecordedRequest
+        public HttpRequest LastRecordedRequest
         {
             get { return lastRecordedRequest; }
         }
-
-
     }
 }

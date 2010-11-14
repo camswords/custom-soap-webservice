@@ -23,6 +23,11 @@ namespace SoapWebservicesTests.Http
             return match.Groups[1].Value;
         }
 
+        public string GetContentType()
+        {
+            return GetString("Content-Type");
+        }
+
         public int GetContentLength()
         {
             return int.Parse(GetString("Content-Length"));

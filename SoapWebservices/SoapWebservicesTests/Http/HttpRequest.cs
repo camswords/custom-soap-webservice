@@ -18,6 +18,25 @@ namespace SoapWebservicesTests.Http
             this.body = body;
         }
 
+        public string StatusLine
+        {
+            get
+            {
+                var header = this.header.AsString();
+                return header.Remove(header.IndexOf("\n")).Trim();
+            }
+        }
+
+        public RequestHeader Header
+        {
+            get { return header; }
+        }
+
+        public RequestBody Body
+        {
+            get { return body; }
+        }
+
         public string GetRawContent()
         {
             var headerValue = header.AsString();

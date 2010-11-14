@@ -22,7 +22,8 @@ namespace SoapWebservicesTests
 
             new HttpGateway().Get(new HttpGet(string.Format("http://localhost:{0}/", server.PortNumber)));
 
-            Assert.That(recordingRequestHandler.LastRecordedRequest, Text.Contains("GET / HTTP/1.1"));
+            var recordedRequest = recordingRequestHandler.LastRecordedRequest;
+            Assert.That(recordedRequest.StatusLine, Text.Contains("GET / HTTP/1.1"));
         }
 
         [Test]
@@ -75,9 +76,10 @@ namespace SoapWebservicesTests
             var uri = string.Format("http://localhost:{0}", server.PortNumber);
             new HttpGateway().Post(new HttpPost(uri, string.Empty, "text/xml", "utf-8"));
 
-            Assert.That(requestHandler.LastRecordedRequest, Text.Contains("POST / HTTP/1.1"));
-            Assert.That(requestHandler.LastRecordedRequest, Text.Contains("Content-Type: text/xml;charset=utf-8"));
-            Assert.That(requestHandler.LastRecordedRequest, Text.Contains("Content-Length: 0"));
+            var recordedRequest = requestHandler.LastRecordedRequest;
+            Assert.That(recordedRequest.StatusLine, Is.EqualTo("POST / HTTP/1.1"));
+            Assert.That(recordedRequest.Header.GetContentType(), Is.EqualTo("text/xml;charset=utf-8"));
+            Assert.That(recordedRequest.Header.GetContentLength(), Is.EqualTo(0));
         }
 
         [Test]
@@ -90,9 +92,10 @@ namespace SoapWebservicesTests
             var uri = string.Format("http://localhost:{0}", server.PortNumber);
             new HttpGateway().Post(new HttpPost(uri, "test.data", "text/xml", "utf-8"));
 
-            Assert.That(requestHandler.LastRecordedRequest, Text.Contains("POST / HTTP/1.1"));
-            Assert.That(requestHandler.LastRecordedRequest, Text.Contains("Content-Length: 9"));
-            Assert.That(requestHandler.LastRecordedRequest, Text.Contains("test.data"));
+            var recordedRequest = requestHandler.LastRecordedRequest;
+            Assert.That(recordedRequest.StatusLine, Text.Contains("POST / HTTP/1.1"));
+            Assert.That(recordedRequest.Header.GetContentLength(), Is.EqualTo(9));
+            Assert.That(recordedRequest.Body.GetContent(), Is.EqualTo("test.data"));
         }
     }
 }
