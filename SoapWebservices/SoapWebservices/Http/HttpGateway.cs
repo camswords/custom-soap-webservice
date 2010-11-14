@@ -13,12 +13,14 @@ namespace SoapWebservices.Http
     {
         public HttpResponse Execute(HttpMethod httpMethod)
         {
-            var request = HttpWebRequest.Create(httpMethod.Uri);
-            request.Method = httpMethod.Method;
-            httpMethod.Headers.Keys.ForEach(name => request.Headers.Add(name, httpMethod.Headers[name]));
-
+            var request = (HttpWebRequest) WebRequest.Create(httpMethod.Uri);
             var body = httpMethod.GetBody();
+
+            request.Timeout = 5000;
+            request.ReadWriteTimeout = 20000;
+            request.Method = httpMethod.Method;
             request.ContentLength = body.ContentLength;
+            httpMethod.Headers.Keys.ForEach(name => request.Headers.Add(name, httpMethod.Headers[name]));
 
             if (body.HasContent())
             {
@@ -37,6 +39,11 @@ namespace SoapWebservices.Http
             }
             catch (WebException e)
             {
+                if (e.Response == null)
+                {
+                    throw;
+                }
+
                 var response = (HttpWebResponse)e.Response;
                 return new HttpResponseFactory().Create(response);
             }
