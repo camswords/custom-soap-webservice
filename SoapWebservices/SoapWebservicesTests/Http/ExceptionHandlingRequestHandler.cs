@@ -12,13 +12,13 @@ namespace SoapWebservicesTests.Http
             this.requestHandler = requestHandler;
         }
 
-        public void Handle(string requestContent, HttpRequest request, TextWriter response)
+        public void Handle(HttpRequest request, TextWriter response)
         {
             var writer = new StringWriter();
 
             try
             {
-                requestHandler.Handle(requestContent, request, writer);
+                requestHandler.Handle(request, writer);
                 response.Write(writer.ToString());
             }
             catch (Exception e)
