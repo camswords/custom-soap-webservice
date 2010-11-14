@@ -6,9 +6,9 @@ namespace SoapWebservicesTests.Http
     {
         private string lastRecordedRequest = null;
 
-        public void Handle(string request, TextWriter response)
+        public void Handle(string requestContent, HttpRequest request, TextWriter response)
         {
-            lastRecordedRequest = request;
+            lastRecordedRequest = request.GetRawContent();
 
             response.WriteLine("HTTP/1.1 200 OK");
             response.WriteLine("");

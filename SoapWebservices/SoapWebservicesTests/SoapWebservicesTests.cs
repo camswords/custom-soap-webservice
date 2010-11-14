@@ -28,7 +28,7 @@ namespace SoapWebservicesTests
         [Test]
         public void should_parse_response_for_get_request()
         {
-            var server = new WebServer((request, responseStream) =>
+            var server = new WebServer((requestContent, request, responseStream) =>
             {
                 responseStream.WriteLine("HTTP/1.1 200 OK");
                 responseStream.WriteLine("");
@@ -48,7 +48,7 @@ namespace SoapWebservicesTests
         [Test]
         public void should_return_failed_response_when_server_returns_internal_server_error_on_get_request()
         {
-            var server = new WebServer((request, responseStream) =>
+            var server = new WebServer((requestContent, request, responseStream) =>
             {
                 responseStream.WriteLine("HTTP/1.1 500 Internal Server Error");
                 responseStream.WriteLine("");

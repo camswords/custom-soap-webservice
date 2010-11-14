@@ -7,17 +7,17 @@ namespace SoapWebservicesTests.Http
 {
     public class HttpRequestReader
     {
-        public string Read(NetworkStream connection)
+        public HttpRequest Read(NetworkStream connection)
         {
             var header = ReadHeader(connection);
 
             if (header.HasBody())
             {
                 var body = ReadBody(connection, header);
-                return new HttpRequest(header, body).GetRawContent();
+                return new HttpRequest(header, body);
             }
 
-            return new HttpRequest(header).GetRawContent();
+            return new HttpRequest(header);
         }
 
         public RequestHeader ReadHeader(NetworkStream connection)

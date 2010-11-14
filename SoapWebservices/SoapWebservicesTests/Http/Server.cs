@@ -14,7 +14,7 @@ namespace SoapWebservicesTests.Http
         private Thread listeningThread;
         private int portNumber;
 
-        public WebServer(Action<string, TextWriter> requestHandler) : 
+        public WebServer(Action<string, HttpRequest, TextWriter> requestHandler) : 
            this(new DelegateRequestHandler(requestHandler))
         {
         }
@@ -45,7 +45,7 @@ namespace SoapWebservicesTests.Http
 
             try
             {
-                requestHandler.Handle(request, response);
+                requestHandler.Handle(request.GetRawContent(), request, response);
                 response.Flush();
             }
             finally
