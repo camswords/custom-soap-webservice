@@ -26,19 +26,16 @@ namespace SoapWebservices
                 requestStream.Write(data, 0, data.Length);
             }
 
-            var response = (HttpWebResponse)request.GetResponse();
-            var statusCode = response.StatusCode;
-            var statusDescription = response.StatusDescription;
-
-            var dataStream = response.GetResponseStream();
-            var responseStream = new StreamReader(dataStream);
-            var content = responseStream.ReadToEnd();
-
-            responseStream.Close();
-            dataStream.Close();
-            response.Close();
-
-            return new HttpResponse(statusCode, statusDescription, content);
+            try
+            {
+                var response = (HttpWebResponse)request.GetResponse();
+                return new HttpResponseFactory().Create(response);
+            }
+            catch (WebException e)
+            {
+                var response = (HttpWebResponse)e.Response;
+                return new HttpResponseFactory().Create(response);
+            }
         }
 
         public HttpResponse Get(HttpGet get)
