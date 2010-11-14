@@ -12,10 +12,6 @@ namespace SoapWebservices
 
         bool CanSendBody();
 
-        bool HasBody();
-
-        byte[] ToBytes();
-
         HttpBody GetBody();
 
     }

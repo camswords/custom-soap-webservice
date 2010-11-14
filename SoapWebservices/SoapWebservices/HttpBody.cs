@@ -3,25 +3,30 @@ namespace SoapWebservices
 {
     public class HttpBody
     {
-        public static readonly HttpBody EMPTY = new HttpBody(new byte[0], "text/xml;charset=utf-8");
+        public static readonly HttpBody EMPTY = new HttpBody(new byte[0], "text/xml", "utf-8");
 
         private readonly byte[] data;
-        private readonly string contentTypeHeader;
+        private readonly string contentType;
 
-        public HttpBody(byte[] data, string contentTypeHeader)
+        public HttpBody(byte[] data, string contentType, string charset)
         {
             this.data = data;
-            this.contentTypeHeader = contentTypeHeader;
+            this.contentType = string.Format("{0};charset={1}", contentType, charset);
         }
 
         public string ContentType
         {
-            get { return contentTypeHeader; }
+            get { return contentType; }
         }
 
-        public long ContentLength
+        public int ContentLength
         {
             get { return data.Length; }
+        }
+
+        public bool HasContent()
+        {
+            return data.Length > 0;
         }
 
         public byte[] Data

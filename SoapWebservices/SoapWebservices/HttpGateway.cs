@@ -19,13 +19,13 @@ namespace SoapWebservices
                 var body = http.GetBody();
                 request.ContentLength = body.ContentLength;
 
-                if (http.HasBody())
+                if (body.HasContent())
                 {
                     request.ContentType = body.ContentType;
 
                     using (var requestStream = request.GetRequestStream())
                     {
-                        requestStream.Write(body.Data, 0, (int) body.ContentLength);
+                        requestStream.Write(body.Data, 0, body.ContentLength);
                     }
                 }
             }

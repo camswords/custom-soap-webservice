@@ -22,24 +22,14 @@ namespace SoapWebservices
             get { return uri; }
         }
 
-        public bool HasBody()
+        public IDictionary<string, string> Headers
         {
-            return false;
+            get { return new Dictionary<string, string>(); }
         }
 
         public bool CanSendBody()
         {
             return false;
-        }
-
-        public byte[] ToBytes()
-        {
-            throw new Exception("data on a get is not supported");
-        }
-
-        public IDictionary<string, string> Headers
-        {
-            get { return new Dictionary<string, string>(); }
         }
 
         public HttpBody GetBody()
