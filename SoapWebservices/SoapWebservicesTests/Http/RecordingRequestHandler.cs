@@ -6,7 +6,7 @@ namespace SoapWebservicesTests.Http
     {
         private string lastRecordedRequest = null;
 
-        public void Handle(string request, StreamWriter response)
+        public void Handle(string request, TextWriter response)
         {
             lastRecordedRequest = request;
 
