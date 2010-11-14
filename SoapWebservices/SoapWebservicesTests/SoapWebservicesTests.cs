@@ -5,6 +5,7 @@ using System.Text;
 using SoapWebservices;
 using System.IO;
 using System;
+using SoapWebservices.Http;
 using SoapWebservicesTests.Http;
 using SoapWebservicesTests.Http.Request.Handler;
 

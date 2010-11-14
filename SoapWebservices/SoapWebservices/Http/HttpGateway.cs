@@ -4,7 +4,7 @@ using System.Text;
 using System;
 using System.Linq;
 
-namespace SoapWebservices
+namespace SoapWebservices.Http
 {
     public class HttpGateway
     {

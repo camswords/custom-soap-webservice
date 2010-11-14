@@ -45,13 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HttpBody.cs" />
-    <Compile Include="HttpGateway.cs" />
-    <Compile Include="HttpGet.cs" />
-    <Compile Include="HttpMethod.cs" />
-    <Compile Include="HttpPost.cs" />
-    <Compile Include="HttpResponse.cs" />
-    <Compile Include="HttpResponseFactory.cs" />
+    <Compile Include="Http\HttpBody.cs" />
+    <Compile Include="Http\HttpGateway.cs" />
+    <Compile Include="Http\HttpGet.cs" />
+    <Compile Include="Http\HttpMethod.cs" />
+    <Compile Include="Http\HttpPost.cs" />
+    <Compile Include="Http\HttpResponse.cs" />
+    <Compile Include="Http\HttpResponseFactory.cs" />
     <Compile Include="ICollectionExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

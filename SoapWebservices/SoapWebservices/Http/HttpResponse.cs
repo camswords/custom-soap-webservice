@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace SoapWebservices
+namespace SoapWebservices.Http
 {
     public class HttpResponse
     {
