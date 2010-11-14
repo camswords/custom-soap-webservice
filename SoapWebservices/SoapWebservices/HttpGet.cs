@@ -27,6 +27,11 @@ namespace SoapWebservices
             return false;
         }
 
+        public bool CanSendBody()
+        {
+            return false;
+        }
+
         public byte[] ToBytes()
         {
             throw new Exception("data on a get is not supported");
@@ -35,6 +40,11 @@ namespace SoapWebservices
         public IDictionary<string, string> Headers
         {
             get { return new Dictionary<string, string>(); }
+        }
+
+        public HttpBody GetBody()
+        {
+            return HttpBody.EMPTY;
         }
     }
 }

@@ -10,9 +10,13 @@ namespace SoapWebservices
 
         IDictionary<string, string> Headers { get; }
 
+        bool CanSendBody();
+
         bool HasBody();
 
         byte[] ToBytes();
+
+        HttpBody GetBody();
 
     }
 }

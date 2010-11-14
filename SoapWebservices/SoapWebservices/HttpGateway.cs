@@ -8,33 +8,28 @@ namespace SoapWebservices
 {
     public class HttpGateway
     {
-        public HttpResponse Execute(HttpMethod post)
+        public HttpResponse Execute(HttpMethod http)
         {
-            var request = HttpWebRequest.Create(post.Uri);
-            request.Method = post.Method;
+            var request = HttpWebRequest.Create(http.Uri);
+            request.Method = http.Method;
+            http.Headers.Keys.ForEach(name => request.Headers.Add(name, http.Headers[name]));
 
-            if (post.Headers.ContainsKey("Content-Type"))
+            if (http.CanSendBody())
             {
-                request.ContentType = post.Headers["Content-Type"];
-            }
-            if (post.Headers.ContainsKey("Content-Length"))
-            {
-                request.ContentLength = long.Parse(post.Headers["Content-Length"]);
-            }
+                var body = http.GetBody();
+                request.ContentLength = body.ContentLength;
 
-            post.Headers.Keys
-                .Where(key => !key.Equals("Content-Type") && !key.Equals("Content-Length"))
-                .ToList().ForEach(key => request.Headers.Add(key, post.Headers[key]));
-
-            if (post.HasBody())
-            {
-                using (var requestStream = request.GetRequestStream())
+                if (http.HasBody())
                 {
-                    var data = post.ToBytes();
-                    requestStream.Write(data, 0, data.Length);
+                    request.ContentType = body.ContentType;
+
+                    using (var requestStream = request.GetRequestStream())
+                    {
+                        requestStream.Write(body.Data, 0, (int) body.ContentLength);
+                    }
                 }
             }
-
+            
             try
             {
                 var response = (HttpWebResponse)request.GetResponse();

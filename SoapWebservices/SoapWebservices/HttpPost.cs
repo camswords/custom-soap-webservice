@@ -46,20 +46,24 @@ namespace SoapWebservices
             return Encoding.GetEncoding(charset).GetBytes(data);
         }
 
+        public bool CanSendBody()
+        {
+            return true;
+        }
+
         public bool HasBody()
         {
             return ContentLength > 0;
         }
 
+        public HttpBody GetBody()
+        {
+            return new HttpBody(ToBytes(), ContentType);
+        }
+
         public IDictionary<string, string> Headers
         {
-            get 
-            {
-                var allHeaders = new Dictionary<string, string>(headers);
-                allHeaders.Add("Content-Type", ContentType);
-                allHeaders.Add("Content-Length", ContentLength.ToString());
-                return allHeaders; 
-            }
+            get { return headers; }
         }
 
         public void AddHeader(string name, string value)

@@ -14,7 +14,7 @@ namespace SoapWebservicesTests.Http.Request
 
         public string GetContentEncoding()
         {
-            var contentType = GetString("Content-Type");
+            var contentType = GetHeader("Content-Type");
             var match = new Regex(".*;charset=(.*)").Match(contentType);
             if (!match.Success)
             {
@@ -25,17 +25,20 @@ namespace SoapWebservicesTests.Http.Request
 
         public string GetContentType()
         {
-            return GetString("Content-Type");
+            return GetHeader("Content-Type");
         }
 
         public int GetContentLength()
         {
-            return int.Parse(GetString("Content-Length"));
+            return int.Parse(GetHeader("Content-Length"));
         }
 
         public bool HasBody()
         {
-            return GetMethod() != "GET";
+            return GetMethod() != "GET" 
+                   && HasHeader("Content-Length")
+                   && HasHeader("Content-Type")
+                   && GetContentLength() > 0;
         }
 
         public string GetMethod()
@@ -50,14 +53,22 @@ namespace SoapWebservicesTests.Http.Request
             return match.Groups[1].Value;
         }
 
-        private string GetString(string key)
+        private bool HasHeader(string name)
         {
-            var regex = new Regex(key + ": (.*)");
+            var regex = new Regex(name + ": (.*)");
+            var match = regex.Match(header);
+
+            return match.Success;
+        }
+
+        private string GetHeader(string name)
+        {
+            var regex = new Regex(name + ": (.*)");
             var match = regex.Match(header);
 
             if (!match.Success)
             {
-                throw new ArgumentException(string.Format("failed to find header identified by key {0} in {1}", key, header));
+                throw new ArgumentException(string.Format("failed to find header identified by key {0} in {1}", name, header));
             }
             return match.Groups[1].Value.Trim();
         }

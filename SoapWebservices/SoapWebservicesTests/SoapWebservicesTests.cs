@@ -78,7 +78,6 @@ namespace SoapWebservicesTests
 
             var recordedRequest = requestHandler.LastRecordedRequest;
             Assert.That(recordedRequest.StatusLine, Is.EqualTo("POST / HTTP/1.1"));
-            Assert.That(recordedRequest.Header.GetContentType(), Is.EqualTo("text/xml;charset=utf-8"));
             Assert.That(recordedRequest.Header.GetContentLength(), Is.EqualTo(0));
         }
 
@@ -94,6 +93,7 @@ namespace SoapWebservicesTests
 
             var recordedRequest = requestHandler.LastRecordedRequest;
             Assert.That(recordedRequest.StatusLine, Text.Contains("POST / HTTP/1.1"));
+            Assert.That(recordedRequest.Header.GetContentType(), Is.EqualTo("text/xml;charset=utf-8"));
             Assert.That(recordedRequest.Header.GetContentLength(), Is.EqualTo(9));
             Assert.That(recordedRequest.Body.GetContent(), Is.EqualTo("test.data"));
         }
