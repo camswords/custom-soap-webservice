@@ -8,15 +8,15 @@ namespace SoapWebservices
 {
     public class HttpGateway
     {
-        public HttpResponse Execute(HttpMethod http)
+        public HttpResponse Execute(HttpMethod httpMethod)
         {
-            var request = HttpWebRequest.Create(http.Uri);
-            request.Method = http.Method;
-            http.Headers.Keys.ForEach(name => request.Headers.Add(name, http.Headers[name]));
+            var request = HttpWebRequest.Create(httpMethod.Uri);
+            request.Method = httpMethod.Method;
+            httpMethod.Headers.Keys.ForEach(name => request.Headers.Add(name, httpMethod.Headers[name]));
 
-            if (http.CanSendBody())
+            if (httpMethod.CanSendBody())
             {
-                var body = http.GetBody();
+                var body = httpMethod.GetBody();
                 request.ContentLength = body.ContentLength;
 
                 if (body.HasContent())
@@ -40,11 +40,6 @@ namespace SoapWebservices
                 var response = (HttpWebResponse)e.Response;
                 return new HttpResponseFactory().Create(response);
             }
-        }
-
-        public HttpResponse Get(HttpGet get)
-        {
-            return Execute(get);
         }
     }
 }

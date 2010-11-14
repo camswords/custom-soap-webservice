@@ -5,6 +5,9 @@ namespace SoapWebservicesTests.Http.Request
 {
     public class RequestHeader
     {
+        private static Regex CHARSET_CAPTURE = new Regex(".*;charset=(.*)");
+        private static Regex METHOD_CAPTURE = new Regex("(.*) .* HTTP/1.1");
+
         private string header;
 
         public RequestHeader(string header)
@@ -15,7 +18,7 @@ namespace SoapWebservicesTests.Http.Request
         public string GetContentEncoding()
         {
             var contentType = GetHeader("Content-Type");
-            var match = new Regex(".*;charset=(.*)").Match(contentType);
+            var match = CHARSET_CAPTURE.Match(contentType);
             if (!match.Success)
             {
                 throw new ArgumentException(string.Format("failed to extract content type from content type header {0}", contentType));
@@ -43,8 +46,7 @@ namespace SoapWebservicesTests.Http.Request
 
         public string GetMethod()
         {
-            var regex = new Regex("(.*) .* HTTP/1.1");
-            var match = regex.Match(header);
+            var match = METHOD_CAPTURE.Match(header);
 
             if (!match.Success)
             {
