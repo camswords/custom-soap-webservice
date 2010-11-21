@@ -11,7 +11,7 @@ using System.Xml.XPath;
 
 namespace SoapWebservices
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
