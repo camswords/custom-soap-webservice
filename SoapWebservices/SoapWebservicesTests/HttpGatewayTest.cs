@@ -13,7 +13,7 @@ using SoapWebservicesTests.Http.Request.Handler;
 namespace SoapWebservicesTests
 {
     [TestFixture]
-    public class SoapWebservicesTests
+    public class HttpGatewayTest
     {
         [Test]
         public void should_send_request_for_a_get_method()
