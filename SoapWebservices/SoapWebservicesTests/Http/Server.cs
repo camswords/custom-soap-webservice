@@ -50,7 +50,6 @@ namespace SoapWebservicesTests.Http
             try
             {
                 requestHandler.Handle(request, response);
-                Thread.Sleep(10000);
                 response.Flush();
             }
             finally
